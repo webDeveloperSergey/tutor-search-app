@@ -1,3 +1,9 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 16px;
   font-family: 'Source Sans Pro', sans-serif;
@@ -5,8 +11,9 @@ body {
 }
 
 .container {
-  max-width: 1224px;
+  max-width: 1254px;
   margin: 0 auto;
+  padding: 0 15px;
 }
 
 .title-1 {
