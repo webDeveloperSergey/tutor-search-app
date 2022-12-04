@@ -33,7 +33,7 @@
 
 
   <!-- Filter -->
-  <header class="filter">
+  <section class="filter">
     <div class="container">
       <div class="filter__wrap">
         <div class="filter__item filter__item_filters">
@@ -91,12 +91,72 @@
         </div>
 
         <div class="filter__item filter__item_btn">
-          <button class="filter__btn">Искать репетитора</button>
+          <button class="filter__btn btn">Искать репетитора</button>
         </div>
       </div>
     </div>
-  </header>
+  </section>
   <!-- ./Filter -->
+
+
+  <!-- Tutors -->
+  <section class="tutors">
+    <div class="container">
+      <div class="tutors__top">
+        <h1 class="tutors__title title-1">Все специалисты</h1>
+        <div class="tutors__filter">
+          <div class="tutors__isexam">
+            <input type="checkbox" class="tutors__checkbox" id="check">
+            <label for="check">🔥 Подготовка к огэ/егэ</label>
+          </div>
+
+          <div class="tutors__sort">
+            <div class="tutors__sortby">Сортировка по: <span class="tutors__sortby-selected">популярности</span></div>
+            <div class="tutors__sortby-more none">
+              <li class="tutors__sortby-li">по популярности</li>
+              <li class="tutors__sortby-li">по цене</li>
+              <li class="tutors__sortby-li">по алфавиту</li>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tutors__bottom">
+
+        <div class="tutors__person">
+          <img alt="" class="tutors__person-img" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80">
+
+          <span class="tutors__person-subject">математика</span>
+
+
+          <div class="tutors__person-info">
+            <h3 class="tutors__person-name title-2">Андрей Гавриков</h3>
+            <span class="tutors__person-exam">огэ / егэ</span>
+          </div>
+
+          <div class="tutors__person-info tutors__person-info_2">
+            <div class="tutors__person-rating">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-dis.svg" alt="">
+            </div>
+            <div class="tutors__person-price">1 200 / час</div>
+          </div>
+
+          <div class="tutors__person-info">
+            <p class="tutors__person-text">В рамках спецификации современных стандартов, предприниматели в сети интернет, инициированные исключительно синтетически, объективно рассмотрены соответствующими инстанциями.</p>
+          </div>
+
+          <button class="tutors__person-btn btn">Добавить в кандидаты</button>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ./Tutors -->
 
 </body>
 </html>
