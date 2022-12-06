@@ -19,14 +19,20 @@ window.onload = function() {
   })
 
 
-
   filterEl(getData)
+
+  // Получение элементов из фильтра
   const [
-    selectedSubject, 
+    selectedSubject,
     moreSubjectLi,
+
     startPriceEl,
     endPriceEl,
+    
+    selectedExperience,
+    moreExperienceLi
   ] = mainFilterEl
+
 
 
 
@@ -35,13 +41,15 @@ window.onload = function() {
   // Показывать окно с предметами для выбора
   selectedSubject.addEventListener('click', function(event) {
     const thisEl = event.target
-    const parent = event.target.closest('[data-filter="subject"]')
+    const parent = thisEl.closest('[data-filter="subject"]')
     const moreBlock = parent.querySelector('.filter__item-more')
 
     thisEl.classList.toggle('filter__item-selected_active')
     moreBlock.classList.toggle('none')
   })
 
+
+  // Добавления события для филтра с предметами
   moreSubjectLi.forEach(item => {
     item.addEventListener('click', function(event) {
       const thisEl = event.target
@@ -51,15 +59,13 @@ window.onload = function() {
         onUpdate: 'choiceSubject'
       })
 
-
-
     })
   })
 
+
+  // Добавления события для филтра с ценой от и до
   startPriceEl.addEventListener('input', function() {
     const validedInput = validCountInput(this)
-
-    console.log(validedInput)
 
     createEvent(this, {
       startPrice: validedInput,
@@ -76,4 +82,27 @@ window.onload = function() {
     })
   })
 
+
+  // Показывать окно с опытом для выбора
+  selectedExperience.addEventListener('click', function(event) {
+    const thisEl = event.target
+    const parent = thisEl.closest('[data-filter="experience"]')
+    const moreBlock = parent.querySelector('.filter__item-more')
+
+    thisEl.classList.toggle('filter__item-selected_active')
+    moreBlock.classList.toggle('none')
+  })
+
+  // Добавления события для филтра опыта
+  moreExperienceLi.forEach(item => {
+    item.addEventListener('click', function(event) {
+      const thisEl = event.target
+
+      createEvent(thisEl, {
+        experienceYear: thisEl.innerText.toLowerCase(),
+        onUpdate: 'choiceExperience'
+      })
+
+    })
+  })
 }

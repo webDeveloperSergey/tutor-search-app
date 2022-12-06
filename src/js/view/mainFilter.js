@@ -20,11 +20,17 @@ export default function init (getData) {
   const endPriceEl = document.querySelector('[data-price="end"]')
   endPriceEl.value = endPrice
   
-  document.querySelector('#selected-experience').innerText = experienceYear
-  document.querySelector('#rating').value = ratingStar
+  const selectedExperience = document.querySelector('#selected-experience')
+  selectedExperience.innerText = experienceYear
+
+  const rating = document.querySelector('#rating')
+  rating.value = ratingStar
 
   const filterSubject = document.querySelector('[data-filter="subject"]')
   const moreSubjectLi = filterSubject.querySelectorAll('.filter__item-li')
+
+  const filterExperience = document.querySelector('[data-filter="experience"]')
+  const moreExperienceLi = filterExperience.querySelectorAll('.filter__item-li')
 
 
 
@@ -36,5 +42,12 @@ export default function init (getData) {
   })
 
 
-  mainFilterEl.push(selectedSubject, moreSubjectLi, startPriceEl, endPriceEl)
+  mainFilterEl.push(
+    selectedSubject, 
+    moreSubjectLi, 
+    startPriceEl, 
+    endPriceEl,
+    selectedExperience,
+    moreExperienceLi
+    )
 }

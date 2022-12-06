@@ -20,6 +20,18 @@ function getData() {
 function setData(newData) {
   console.log('New Data', newData)
 
+  if (newData.onUpdate === 'updateStartPrice') {
+    if (isNaN(newData.startPrice)) {
+      newData.startPrice = 0
+    }
+  }
+
+  if (newData.onUpdate === 'updateEndPrice') {
+    if (isNaN(newData.endPrice)) {
+      newData.endPrice = 0
+    }
+  }
+
   data = {
     ...data,
     ...newData
