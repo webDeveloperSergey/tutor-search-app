@@ -41,9 +41,9 @@
           <!-- Subject Filter -->
           <div class="filter__item-block" data-filter="subject">
             <h2 class="filter__item-title">Предмет</h2>
-            <span class="filter__item-selected">Математика</span>
-            <div class="filter__item-more none filter__item-more_subject">
-              <li class="filter__item-li filter__item-active">Математика</li>
+            <span class="filter__item-selected" id="selected-subject">Математика</span>
+            <div class="filter__item-more none">
+              <li class="filter__item-li">Математика</li>
               <li class="filter__item-li">Физика</li>
               <li class="filter__item-li">Английский язык</li>
               <li class="filter__item-li">Немецкий язык</li>
@@ -67,7 +67,7 @@
           <!-- Experience Filter -->
           <div class="filter__item-block" data-filter="experience">
             <h2 class="filter__item-title">Опыт работы</h2>
-            <span class="filter__item-selected">< 1 года</span>
+            <span class="filter__item-selected" id="selected-experience">< 1 года</span>
             <div class="filter__item-more none filter__item-more_experience">
               <li class="filter__item-li">< 1 года</li>
               <li class="filter__item-li">от 1 года</li>
@@ -82,7 +82,7 @@
           <div class="filter__item-block" data-filter="rating">
             <h2 class="filter__item-title">Рейтинг</h2>
             <div class="filter__item-rating">
-              <input type="text" class="filter__item-input filter__item-rating-count" placeholder="5">
+              <input type="text" class="filter__item-input filter__item-rating-count" placeholder="5" id="rating">
               <span class="filter__item-rating-text">звезд</span>
             </div>
           </div>
