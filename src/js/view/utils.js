@@ -7,4 +7,30 @@ function validCountInput(input) {
   return valueForData
 }
 
-export { validCountInput }
+
+function setDropDownFilter(selectedFilter, moreLi, curData) {
+  selectedFilter.innerText = curData
+
+  console.log(curData)
+
+  moreLi.forEach(item => {
+    item.classList.remove('filter__item-li_active')
+    if (item.innerText.toLowerCase() === curData) {
+      item.classList.add('filter__item-li_active')
+    }
+  })
+
+  selectedFilter.classList.remove('filter__item-selected_active')
+  moreLi[0].closest('.filter__item-more').classList.add('none')
+
+}
+
+function openMoreBlock(el, parent) {
+  const moreBlock = parent.querySelector('.filter__item-more')
+  
+  el.classList.toggle('filter__item-selected_active')
+  moreBlock.classList.toggle('none')
+}
+
+
+export { validCountInput, setDropDownFilter, openMoreBlock }

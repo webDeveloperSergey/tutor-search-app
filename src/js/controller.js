@@ -3,7 +3,8 @@ import filterEl, { mainFilterEl } from './view/mainFilter'
 import createEvent from './utils/createEvent'
 import updateFilter from './view/updateFilter'
 import { priceFormatter } from './utils/formatter';
-import { validCountInput } from './view/utils';
+import { validCountInput, openMoreBlock } from './view/utils';
+
 
 window.onload = function() {
   const getData = Model.getData
@@ -39,13 +40,27 @@ window.onload = function() {
   // <========= События =========>
 
   // Показывать окно с предметами для выбора
-  selectedSubject.addEventListener('click', function(event) {
-    const thisEl = event.target
-    const parent = thisEl.closest('[data-filter="subject"]')
-    const moreBlock = parent.querySelector('.filter__item-more')
+  // selectedSubject.addEventListener('click', function(event) {
+  //   const thisEl = event.target
+  //   const parent = thisEl.closest('[data-filter="subject"]')
+  //   const moreBlock = parent.querySelector('.filter__item-more')
 
-    thisEl.classList.toggle('filter__item-selected_active')
-    moreBlock.classList.toggle('none')
+  //   thisEl.classList.toggle('filter__item-selected_active')
+  //   moreBlock.classList.toggle('none')
+  // })
+
+  // Показывать окно с элемента для устанвки филтера "subject" и "experience"
+  const selectedFilters = document.querySelectorAll('.filter__item-selected')
+  selectedFilters.forEach(item => {
+    item.addEventListener('click', function() {
+        let parent
+        const parenSubjectFilter = this.closest('[data-filter="subject"]')
+        const parenExperienceFilter = this.closest('[data-filter="experience"]')
+
+        parent = parenSubjectFilter ?? parenExperienceFilter
+
+        openMoreBlock(this, parent)
+    })
   })
 
 
@@ -80,17 +95,6 @@ window.onload = function() {
       endPrice: validedInput,
       onUpdate: 'updateEndPrice'
     })
-  })
-
-
-  // Показывать окно с опытом для выбора
-  selectedExperience.addEventListener('click', function(event) {
-    const thisEl = event.target
-    const parent = thisEl.closest('[data-filter="experience"]')
-    const moreBlock = parent.querySelector('.filter__item-more')
-
-    thisEl.classList.toggle('filter__item-selected_active')
-    moreBlock.classList.toggle('none')
   })
 
   // Добавления события для филтра опыта

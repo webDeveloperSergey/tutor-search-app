@@ -33,15 +33,6 @@ export default function init (getData) {
   const moreExperienceLi = filterExperience.querySelectorAll('.filter__item-li')
 
 
-
-
-  moreSubjectLi.forEach(item => {
-    if (item.innerText.toLowerCase() === data.subject) {
-      item.classList.add('filter__item-li_active')
-    }
-  })
-
-
   mainFilterEl.push(
     selectedSubject, 
     moreSubjectLi, 

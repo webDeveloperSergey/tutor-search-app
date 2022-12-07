@@ -1,3 +1,4 @@
+import { setDropDownFilter } from './utils';
 import { mainFilterEl } from './mainFilter'
 
 export default function updateFilter(data) {
@@ -14,33 +15,13 @@ export default function updateFilter(data) {
 
 
   
-
-  let selectedFilter, moreLi, curData
-  
   if (data.onUpdate == 'choiceSubject') {
-    selectedFilter = selectedSubject
-    moreLi = moreSubjectLi
-    curData = data.subject
+    setDropDownFilter(selectedSubject, moreSubjectLi, data.subject, data)
   }
 
   if (data.onUpdate == 'choiceExperience') {
-    selectedFilter = selectedExperience
-    moreLi = moreExperienceLi
-    curData = data.experienceYear
+    setDropDownFilter(selectedExperience, moreExperienceLi, data.experienceYear, data)
   }
-
-
-  selectedFilter.innerText = curData
-
-  moreLi.forEach(item => {
-    item.classList.remove('filter__item-li_active')
-    if (item.innerText.toLowerCase() === data.curData) {
-      item.classList.add('filter__item-li_active')
-    }
-  })
-
-  selectedFilter.classList.remove('filter__item-selected_active')
-  moreLi[0].closest('.filter__item-more').classList.add('none')
 
 
 
