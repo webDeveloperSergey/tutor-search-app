@@ -11,8 +11,6 @@ function validCountInput(input) {
 function setDropDownFilter(selectedFilter, moreLi, curData) {
   selectedFilter.innerText = curData
 
-  console.log(curData)
-
   moreLi.forEach(item => {
     item.classList.remove('filter__item-li_active')
     if (item.innerText.toLowerCase() === curData) {
@@ -27,6 +25,20 @@ function setDropDownFilter(selectedFilter, moreLi, curData) {
 
 function openMoreBlock(el, parent) {
   const moreBlock = parent.querySelector('.filter__item-more')
+  
+  const subjectMoreBlock = document.querySelector('[data-filter="subject"]')
+  const experienceMoreBlock = document.querySelector('[data-filter="experience"]')
+
+
+  if (parent.dataset.filter == 'experience') {
+    subjectMoreBlock.querySelector('.filter__item-more').classList.add('none')
+    document.querySelector('#selected-subject').classList.remove('filter__item-selected_active')
+  }
+
+  if (parent.dataset.filter == 'subject') {
+    experienceMoreBlock.querySelector('.filter__item-more').classList.add('none')
+    document.querySelector('#selected-experience').classList.remove('filter__item-selected_active')
+  }
   
   el.classList.toggle('filter__item-selected_active')
   moreBlock.classList.toggle('none')

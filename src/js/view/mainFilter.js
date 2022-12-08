@@ -14,10 +14,10 @@ export default function init (getData) {
   const selectedSubject = document.querySelector('#selected-subject')
   selectedSubject.innerText = subject
 
-  const startPriceEl =  document.querySelector('[data-price="start"]')
+  const startPriceEl =  document.querySelector('[data-input="startPrice"]')
   startPriceEl.vlue = startPrice
 
-  const endPriceEl = document.querySelector('[data-price="end"]')
+  const endPriceEl = document.querySelector('[data-input="endPrice"]')
   endPriceEl.value = endPrice
   
   const selectedExperience = document.querySelector('#selected-experience')

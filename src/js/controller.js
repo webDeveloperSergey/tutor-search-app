@@ -39,16 +39,6 @@ window.onload = function() {
 
   // <========= События =========>
 
-  // Показывать окно с предметами для выбора
-  // selectedSubject.addEventListener('click', function(event) {
-  //   const thisEl = event.target
-  //   const parent = thisEl.closest('[data-filter="subject"]')
-  //   const moreBlock = parent.querySelector('.filter__item-more')
-
-  //   thisEl.classList.toggle('filter__item-selected_active')
-  //   moreBlock.classList.toggle('none')
-  // })
-
   // Показывать окно с элемента для устанвки филтера "subject" и "experience"
   const selectedFilters = document.querySelectorAll('.filter__item-selected')
   selectedFilters.forEach(item => {
@@ -78,24 +68,39 @@ window.onload = function() {
   })
 
 
-  // Добавления события для филтра с ценой от и до
-  startPriceEl.addEventListener('input', function() {
-    const validedInput = validCountInput(this)
+  // Добавления события для филтра с ценой и рейтингом
+  
+  const filterInputs = document.querySelectorAll('.filter__item-input')
+  filterInputs.forEach(item => {
+    item.addEventListener('input', function() {
+      const validedInput = validCountInput(this)
 
-    createEvent(this, {
-      startPrice: validedInput,
-      onUpdate: 'updateStartPrice'
+      if (this.dataset.input == 'startPrice') { 
+        createEvent(this, {
+          startPrice: validedInput,
+          onUpdate: 'updateStartPrice'
+        })
+      }
+
+      if (this.dataset.input == 'endPrice') { 
+        createEvent(this, {
+          endPrice: validedInput,
+          onUpdate: 'updateEndPrice'
+        })
+      }
+
+      if (this.dataset.input == 'rating') {
+        if (this.value > 5) {
+          this.value = ''
+        }
+        createEvent(this, {
+          ratingStar: validedInput,
+          onUpdate: 'updateRating'
+        })
+      }
     })
   })
 
-  endPriceEl.addEventListener('input', function() {
-    const validedInput = validCountInput(this)
-
-    createEvent(this, {
-      endPrice: validedInput,
-      onUpdate: 'updateEndPrice'
-    })
-  })
 
   // Добавления события для филтра опыта
   moreExperienceLi.forEach(item => {

@@ -32,6 +32,12 @@ function setData(newData) {
     }
   }
 
+  if (newData.onUpdate === 'updateRating') {
+    if (isNaN(newData.ratingStar) || newData.ratingStar > 5) {
+      newData.ratingStar = 0
+    }
+  }
+
   data = {
     ...data,
     ...newData
