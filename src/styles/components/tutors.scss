@@ -64,6 +64,12 @@
       content: url(./../images/select-ic-2.svg);
       position: absolute;
       left: -20px;
+      transition: $trans;
+    }
+    &_active {
+      &::before {
+        transform: rotate(180deg);
+      }
     }
     &-selected {
       margin-left: 11px;
@@ -101,6 +107,13 @@
       &:hover {
         color: #fff;
         &::before {
+          width: 100%;
+        }
+      }
+      &_active {
+        color: #fff;
+        &::before {
+          content: '';
           width: 100%;
         }
       }

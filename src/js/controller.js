@@ -1,5 +1,6 @@
 import * as Model from './model';
-import filterEl, { mainFilterEl } from './view/mainFilter'
+import mainFilter, { mainFilterEl } from './view/mainFilter'
+import additionaFilter, { additionaFilterEl } from './view/additionaFilter'
 import createEvent from './utils/createEvent'
 import updateFilter from './view/updateFilter'
 import { priceFormatter } from './utils/formatter';
@@ -17,10 +18,11 @@ window.onload = function() {
     const data = Model.getData()
     // Отдаем новые данные для отоборожения актуального контента
     updateFilter(data)
-  })
+  }) 
 
 
-  filterEl(getData)
+  mainFilter(getData)
+  additionaFilter(getData)
 
   // Получение элементов из фильтра
   const [
@@ -34,10 +36,16 @@ window.onload = function() {
     moreExperienceLi
   ] = mainFilterEl
 
+  const [
+    isExam,
+    sortbySelected,
+    sortbyLi
+  ] = additionaFilterEl
 
 
 
-  // <========= События =========>
+
+  // <========= События для mainFilter =========>
 
   // Показывать окно с элемента для устанвки филтера "subject" и "experience"
   const selectedFilters = document.querySelectorAll('.filter__item-selected')
@@ -48,6 +56,9 @@ window.onload = function() {
         const parenExperienceFilter = this.closest('[data-filter="experience"]')
 
         parent = parenSubjectFilter ?? parenExperienceFilter
+
+        document.querySelector('.tutors__sortby-more').classList.add('none')
+        sortbySelected.parentElement.classList.remove('tutors__sortby_active')
 
         openMoreBlock(this, parent)
     })
@@ -69,7 +80,6 @@ window.onload = function() {
 
 
   // Добавления события для филтра с ценой и рейтингом
-  
   const filterInputs = document.querySelectorAll('.filter__item-input')
   filterInputs.forEach(item => {
     item.addEventListener('input', function() {
@@ -114,4 +124,47 @@ window.onload = function() {
 
     })
   })
+
+
+
+  // <========= События для additionaFilter =========>
+
+  // Добавления события для чекбокса isExam
+  isExam.addEventListener('change', function() {
+
+    createEvent(this, {
+      isExam: this.checked,
+      onUpdate: 'updateIsExam'
+    })
+  })
+
+
+  const sortbySelectedParent = sortbySelected.parentElement
+  sortbySelectedParent.addEventListener('click', function() {
+    const sortbyDropDown = document.querySelector('.tutors__sortby-more')
+
+    const mainFilters = document.querySelectorAll('.filter__item-more')
+    mainFilters.forEach(item => {
+      item.classList.add('none')
+    })
+
+    const mainFiltersSelected = document.querySelectorAll('.filter__item-selected')
+    mainFiltersSelected.forEach(item => {
+      item.classList.remove('filter__item-selected_active')
+    })
+
+    this.classList.toggle('tutors__sortby_active')
+    sortbyDropDown.classList.toggle('none')
+  })
+
+  sortbyLi.forEach(item => {
+    item.addEventListener('click', function() {
+      
+      createEvent(this, {
+        sortbySelected: this.innerText,
+        onUpdate: 'updateSortby'
+      })
+    })
+  })
+
 }

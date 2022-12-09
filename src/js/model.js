@@ -5,7 +5,8 @@ let data = {
   experienceYear: '< 1 года',
   ratingStar: null,
   isExam: false,
-  sortBy: [
+  sortbySelected: 'популярности',
+  sortby: [
     'популярности',
     'цене',
     'алфавиту'
