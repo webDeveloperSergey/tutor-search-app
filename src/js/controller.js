@@ -4,7 +4,8 @@ import additionaFilter, { additionaFilterEl } from './view/additionaFilter'
 import createEvent from './utils/createEvent'
 import updateFilter from './view/updateFilter'
 import { priceFormatter } from './utils/formatter';
-import { validCountInput, openMoreBlock } from './view/utils';
+import { validCountInput, openMoreBlock, getTutorsFromFilter, getTutorsFromOneFilter } from './view/utils';
+import renederTutors from './view/renederTutors';
 
 
 window.onload = function() {
@@ -23,6 +24,7 @@ window.onload = function() {
 
   mainFilter(getData)
   additionaFilter(getData)
+  renederTutors(getData)
 
   // Получение элементов из фильтра
   const [
@@ -43,6 +45,20 @@ window.onload = function() {
   ] = additionaFilterEl
 
 
+
+
+  // <========= События для Поиска =========>
+
+  document.querySelector('.header__search').addEventListener('input', function() {
+    createEvent(this, {
+      search: this.value,
+      onUpdate: 'updateSearch'
+    })
+
+
+    
+    renederTutors(getData)
+  })
 
 
   // <========= События для mainFilter =========>
@@ -104,7 +120,7 @@ window.onload = function() {
           this.value = ''
         }
         createEvent(this, {
-          ratingStar: validedInput,
+          rating: validedInput,
           onUpdate: 'updateRating'
         })
       }
@@ -163,6 +179,22 @@ window.onload = function() {
       createEvent(this, {
         sortbySelected: this.innerText,
         onUpdate: 'updateSortby'
+      })
+    })
+  })
+
+
+
+  // <========= События для для кнопки "Искать репетитора" =========>
+
+  const filterBtn = document.querySelector('.filter__btn')
+  filterBtn.addEventListener('click', function() {
+
+    getData().getTutors().then(items => {
+      const filtredTutors = getTutorsFromFilter(items, getData())
+      createEvent(filterBtn, {
+        tutors: [...filtredTutors],
+        onUpdate: 'clickFilterBtn'
       })
     })
   })

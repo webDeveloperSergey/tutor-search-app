@@ -8,7 +8,7 @@ export default function init (getData) {
     startPrice,
     endPrice,
     experienceYear,
-    ratingStar
+    rating
   } = data
 
   const selectedSubject = document.querySelector('#selected-subject')
@@ -23,8 +23,8 @@ export default function init (getData) {
   const selectedExperience = document.querySelector('#selected-experience')
   selectedExperience.innerText = experienceYear
 
-  const rating = document.querySelector('#rating')
-  rating.value = ratingStar
+  const ratingEl = document.querySelector('#rating')
+  ratingEl.value = rating
 
   const filterSubject = document.querySelector('[data-filter="subject"]')
   const moreSubjectLi = filterSubject.querySelectorAll('.filter__item-li')
