@@ -142,3 +142,4 @@ function getTutorsFromFilter(dataTutors, modelData) {
 
 
 export { validCountInput, setDropDownFilter, openMoreBlock, tutorsTmp, getTutorsFromFilter }
+
