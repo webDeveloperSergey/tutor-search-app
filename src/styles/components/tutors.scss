@@ -119,6 +119,11 @@
       }
     }
   }
+  &__not-found {
+    font-size: 28px;
+    max-width: 500px;
+    color: $grayText;
+  }
   &__bottom {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -170,6 +175,7 @@
       margin-bottom: 73px;
     }
     &-btn {
+      width: 100%;
       padding: 10px 61px;
       font-weight: 600;
       position:absolute;

@@ -21,9 +21,12 @@
           <input type="text" placeholder="Имя репетитор" class="header__search">
         </div>
 
-        <div class="header__item header__item_auth">
-          <div>ddf</div>
-          <div>ddf</div>
+        <div class="header__item header__item_cand">
+          <div>Кандидаты</div>
+          <div class="header__item-cand-block">
+            <img src="./images/cad-ic.svg" alt="">
+            <span class="header__item-cand-count">0</span>
+          </div>
           <!-- Здесь либо регистрация, либо счетчик кандидатов -->
         </div>
       </div>
@@ -42,15 +45,8 @@
           <div class="filter__item-block" data-filter="subject">
             <h2 class="filter__item-title">Предмет</h2>
             <span class="filter__item-selected" id="selected-subject">Математика</span>
-            <div class="filter__item-more none">
-              <li class="filter__item-li filter__item-li_active">Любой</li>
-              <li class="filter__item-li">Математика</li>
-              <li class="filter__item-li">Физика</li>
-              <li class="filter__item-li">Английский язык</li>
-              <li class="filter__item-li">Немецкий язык</li>
-              <li class="filter__item-li">Литература</li>
-              <li class="filter__item-li">Историй</li>
-              <li class="filter__item-li">Обществознание</li>
+            <div class="filter__item-more none filter__item-more_subject">
+              <!-- li -->
             </div>
           </div>
           <!-- ./Subject Filter -->
@@ -70,12 +66,7 @@
             <h2 class="filter__item-title">Опыт работы</h2>
             <span class="filter__item-selected" id="selected-experience">любой</span>
             <div class="filter__item-more none filter__item-more_experience">
-              <li class="filter__item-li filter__item-li_active">любой</li>
-              <li class="filter__item-li">< 1 года</li>
-              <li class="filter__item-li">от 1 года</li>
-              <li class="filter__item-li">от 3 лет</li>
-              <li class="filter__item-li">от 5 лет</li>
-              <li class="filter__item-li">от 10 лет</li>
+              <!-- li -->
             </div>
           </div>
           <!-- ./Experience Filter -->
@@ -90,10 +81,14 @@
           </div>
           <!-- ./Rating Filter -->
 
+          <button class="filter__btn-clear" data-search="search-res">Сбросить фильтр</button>
+
         </div>
 
+
+
         <div class="filter__item filter__item_btn">
-          <button class="filter__btn btn">Искать репетитора</button>
+          <button class="filter__btn btn" data-search="search-res">Искать репетитора</button>
         </div>
       </div>
     </div>
@@ -115,17 +110,17 @@
           <div class="tutors__sort">
             <div class="tutors__sortby">Сортировка по: <span class="tutors__sortby-selected">популярности</span></div>
             <div class="tutors__sortby-more none">
-              <li class="tutors__sortby-li tutors__sortby-li_active">популярности</li>
-              <li class="tutors__sortby-li">цене</li>
-              <li class="tutors__sortby-li">алфавиту</li>
+              <!-- li -->
             </div>
           </div>
         </div>
       </div>
 
-      <div class="tutors__bottom">
+      <div class="tutors__not-found none">К сожалению по вашему запросу ничего не найдено :(</div>
 
-        <div class="tutors__person">
+      <div class="tutors__bottom" id="search-res">
+
+        <!-- <div class="tutors__person">
           <img alt="" class="tutors__person-img" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80">
 
           <span class="tutors__person-subject">математика</span>
@@ -153,10 +148,7 @@
 
           <button class="tutors__person-btn btn">Добавить в кандидаты</button>
 
-        </div>
-
-        
-
+        </div> -->
       </div>
     </div>
   </section>

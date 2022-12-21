@@ -1,4 +1,4 @@
-import { setDropDownFilter } from './utils';
+import { createListenerPersonBtn, renderTutorsinWrap, setDropDownFilter, showNotFound } from './utils';
 import { mainFilterEl } from './mainFilter'
 import { additionaFilterEl } from './additionaFilter';
 
@@ -43,5 +43,34 @@ export default function updateFilter(data) {
       }
     })
   }
+
+  if (data.onUpdate == 'updateIsExam' || data.onUpdate == 'updateSortby') {
+    let tutors = data.tutors
+
+    if (data.isExam) {
+      tutors = tutors.filter(item => item.isExam)
+    }
+
+    if (data.sortbySelected == 'популярности') {
+      tutors = tutors.sort((a, b) => a.rating < b.rating ? 1 : -1)
+    }
+  
+    if (data.sortbySelected == 'цене (от мин)') {
+      tutors = tutors.sort((a, b) => a.price > b.price ? 1 : -1)
+    }
+  
+    if (data.sortbySelected == 'цене (от макс)') {
+      tutors = tutors.sort((a, b) => a.price < b.price ? 1 : -1)
+    }
+
+
+    renderTutorsinWrap(tutors)
+    data.tutors = [...tutors]
+
+    showNotFound()
+    createListenerPersonBtn()
+  }
+
+  
 
 }

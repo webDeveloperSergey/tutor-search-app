@@ -1,3 +1,21 @@
+import createEvent from "../utils/createEvent";
+import { priceFormatter } from "../utils/formatter"
+
+function smoothScroll(dataAtr, topOffsetEl) {
+  let dataSearch = dataAtr;
+  const scrollTarget = document.getElementById(dataSearch);
+
+  const topOffset = document.querySelector(topOffsetEl).offsetHeight;
+  const elementPosition = scrollTarget.getBoundingClientRect().top;
+  const offsetPosition = elementPosition - topOffset;
+
+  window.scrollBy({
+    top: offsetPosition,
+    behavior: 'smooth'
+  });
+}
+
+
 function validCountInput(input) {
   input.value = input.value.replace(/\D/g, '')
   input.value = input.value.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
@@ -86,7 +104,7 @@ function tutorsTmp(data) {
           <div class="tutors__person-rating">
             ${renderStar(item.rating)}
           </div>
-          <div class="tutors__person-price">${item.price} / час</div>
+          <div class="tutors__person-price">${priceFormatter.format(item.price)} / час</div>
         </div>
 
         <div class="tutors__person-info">
@@ -105,6 +123,43 @@ function tutorsTmp(data) {
 
   return htmlTutors.join('')
 }
+
+
+function renderTutorsinWrap(data) {
+  const filteredHtmlTutors = tutorsTmp(data)
+  const tutorsWrap = document.querySelector('.tutors__bottom')
+  tutorsWrap.innerHTML = filteredHtmlTutors
+}
+
+function createListenerPersonBtn () {
+  const personBtns = document.querySelectorAll('.tutors__person-btn')
+  console.log(personBtns)
+
+  personBtns.forEach(item => {
+    item.addEventListener('click', function() {
+      createEvent(this, {
+        onUpdate: 'updateCandCount'
+      })
+
+      this.innerText = '+1'
+      setTimeout(() => {
+        this.innerText = 'Добавить в кандидаты'
+      }, 1000);
+      
+    })
+  })
+}
+
+function showNotFound() {
+  const tutorsWrap = document.querySelector('.tutors__bottom')
+
+  if (tutorsWrap.children.length == 0) {
+    document.querySelector('.tutors__not-found').classList.remove('none')
+  } else {
+    document.querySelector('.tutors__not-found').classList.add('none')
+  }
+}
+
 
 function getTutorsFromFilter(dataTutors, modelData) {
   let tutors = [...dataTutors]
@@ -125,21 +180,18 @@ function getTutorsFromFilter(dataTutors, modelData) {
     tutors = tutors.filter(item => item.rating == modelData.rating)
   }
 
-  if (modelData.isExam) {
-    tutors = tutors.filter(item => item.isExam)
-  }
+  // console.log(tutors, 'tutors=====================')
 
+  renderTutorsinWrap(tutors)
 
-  console.log(tutors, 'tutors=====================')
+  showNotFound()
 
-
-  const filteredHtmlTutors = tutorsTmp(tutors)
-  const tutorsWrap = document.querySelector('.tutors__bottom')
-  tutorsWrap.innerHTML = filteredHtmlTutors
+  createListenerPersonBtn()
 
   return tutors
 }
 
 
-export { validCountInput, setDropDownFilter, openMoreBlock, tutorsTmp, getTutorsFromFilter }
 
+
+export { smoothScroll, validCountInput, setDropDownFilter, openMoreBlock, tutorsTmp, renderTutorsinWrap, createListenerPersonBtn, showNotFound, getTutorsFromFilter }

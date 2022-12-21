@@ -9,6 +9,8 @@
     &_filters {
       display: flex;
       align-items: flex-end;
+      flex-wrap: wrap;
+      max-width: 700px;
     }
     &-block {
       display: flex;
@@ -27,7 +29,7 @@
       color: $grayText;
     }
     &-selected {
-      font-size: 18px;
+      font-size: 16px;
       color: $accent;
       cursor: pointer;
       position: relative;
@@ -122,6 +124,16 @@
     padding: 12px 30px;
     font-weight: 600;
     font-size: 18px;
+    &-clear {
+      display: block;
+      margin-top: 30px;
+      font-size: 14px;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      color: $accent;
+      cursor: pointer;
+    }
   }
 }
 
@@ -148,8 +160,8 @@
       &_filters {
         flex-wrap: wrap;
       }
-      &-block {
-        margin-bottom: 40px;
+      &-block:nth-child(4) {
+        margin-top: 40px;
       }
     }
   }
@@ -163,6 +175,17 @@
     }
     &__btn {
       width: 100%;
+    }
+  }
+}
+
+@media (max-width: 390px) {	
+	.filter {
+    &__item-block {
+      margin-bottom: 30px;
+    }
+    &__item-block:nth-child(4) {
+      margin-top: 0;
     }
   }
 }

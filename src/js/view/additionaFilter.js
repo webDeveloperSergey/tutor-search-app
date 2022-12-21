@@ -6,19 +6,23 @@ export default function init(getData) {
   const {
     isExam,
     sortbySelected,
-    sortby
+    sortbyList
   } = data
 
   const isExamEl = document.querySelector('.tutors__checkbox')
-  isExamEl.dataset.checked = isExam
+  isExamEl.checked = isExam
 
   const sortbySelectedEl = document.querySelector('.tutors__sortby-selected')
   sortbySelectedEl.innerText = sortbySelected
 
-  const sortbyLi = document.querySelectorAll('.tutors__sortby-li')
-  sortbyLi.forEach((item, index) => {
-    item.innerText = sortby[index]
+  const sortbyMoreBlock = document.querySelector('.tutors__sortby-more')
+  const renderSortbyList = sortbyList.map(item => {
+    return `<li class="tutors__sortby-li">${item}</li>`
   })
+  sortbyMoreBlock.innerHTML = renderSortbyList.join('')
+
+  const sortbyLi = document.querySelectorAll('.tutors__sortby-li')
+  document.querySelector('.tutors__sortby-li').classList.add('tutors__sortby-li_active')
 
   additionaFilterEl.push(isExamEl, sortbySelectedEl, sortbyLi)
 

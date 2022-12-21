@@ -3,9 +3,10 @@ import mainFilter, { mainFilterEl } from './view/mainFilter'
 import additionaFilter, { additionaFilterEl } from './view/additionaFilter'
 import createEvent from './utils/createEvent'
 import updateFilter from './view/updateFilter'
-import { priceFormatter } from './utils/formatter';
-import { validCountInput, openMoreBlock, getTutorsFromFilter, getTutorsFromOneFilter } from './view/utils';
+import candidates from './view/candidates'
+import { smoothScroll, validCountInput, openMoreBlock, getTutorsFromFilter, renderTutorsinWrap, createListenerPersonBtn } from './view/utils';
 import renederTutors from './view/renederTutors';
+import updateCandidates from './view/updateCandidates';
 
 
 window.onload = function() {
@@ -19,14 +20,15 @@ window.onload = function() {
     const data = Model.getData()
     // Отдаем новые данные для отоборожения актуального контента
     updateFilter(data)
+    updateCandidates(data)
   }) 
 
-
+  candidates(getData)
   mainFilter(getData)
   additionaFilter(getData)
   renederTutors(getData)
 
-  // Получение элементов из фильтра
+  // Получение элементов из главного фильтра
   const [
     selectedSubject,
     moreSubjectLi,
@@ -35,16 +37,17 @@ window.onload = function() {
     endPriceEl,
     
     selectedExperience,
-    moreExperienceLi
+    moreExperienceLi,
+
+    ratingEl
   ] = mainFilterEl
 
+  // Получение элементов из дополнительного фильтра
   const [
     isExam,
     sortbySelected,
     sortbyLi
   ] = additionaFilterEl
-
-
 
 
   // <========= События для Поиска =========>
@@ -55,8 +58,6 @@ window.onload = function() {
       onUpdate: 'updateSearch'
     })
 
-
-    
     renederTutors(getData)
   })
 
@@ -78,6 +79,25 @@ window.onload = function() {
 
         openMoreBlock(this, parent)
     })
+  })
+
+  window.addEventListener('click', function(e) {
+    const selectedFilter = document.querySelectorAll('.filter__item-selected')
+    const sortbyFilter = document.querySelector('.tutors__sortby')
+
+    selectedFilter.forEach(item => {
+      const itemMore = item.closest('.filter__item-block').querySelector('.filter__item-more')
+
+      if (e.target != item) {
+        item.classList.remove('filter__item-selected_active')
+        itemMore.classList.add('none')
+      }
+    })
+
+    if (e.target != sortbyFilter) {
+      document.querySelector('.tutors__sortby-more').classList.add('none')
+      sortbyFilter.classList.remove('tutors__sortby_active')
+    }
   })
 
 
@@ -116,7 +136,7 @@ window.onload = function() {
       }
 
       if (this.dataset.input == 'rating') {
-        if (this.value > 5) {
+        if (this.value > 5 || this.value == 0) {
           this.value = ''
         }
         createEvent(this, {
@@ -152,9 +172,11 @@ window.onload = function() {
       isExam: this.checked,
       onUpdate: 'updateIsExam'
     })
+
+    
   })
 
-
+  // Добавления события для сортировки
   const sortbySelectedParent = sortbySelected.parentElement
   sortbySelectedParent.addEventListener('click', function() {
     const sortbyDropDown = document.querySelector('.tutors__sortby-more')
@@ -186,9 +208,10 @@ window.onload = function() {
 
 
   // <========= События для для кнопки "Искать репетитора" =========>
-
   const filterBtn = document.querySelector('.filter__btn')
   filterBtn.addEventListener('click', function() {
+
+    document.querySelector('.tutors__title').innerText = 'Специалисты по запросу'
 
     getData().getTutors().then(items => {
       const filtredTutors = getTutorsFromFilter(items, getData())
@@ -197,6 +220,63 @@ window.onload = function() {
         onUpdate: 'clickFilterBtn'
       })
     })
+
+    let data = this.getAttribute('data-search')
+    smoothScroll(data, '.filter')
+
+    isExam.checked = false
+    sortbySelected.innerText = 'популярности'
+
   })
 
+  // <========= События для для кнопки "Очистить фильтр" =========>
+  const clearBtn = document.querySelector('.filter__btn-clear')
+  clearBtn.addEventListener('click', function() {
+
+    getData().getTutors().then(items => {
+      let tutors = [...items]
+      renderTutorsinWrap(tutors)
+
+      createEvent(clearBtn, {
+        onUpdate: 'clearBtn'
+      })
+    })
+
+    document.querySelector('.tutors__title').innerText = 'Все специалисты'
+
+    selectedSubject.innerText = 'любой'
+    startPriceEl.value = null
+    endPriceEl.value = null
+    selectedExperience.innerText = 'любой'
+    ratingEl.value = null
+    sortbySelected.innerText = 'популярности'
+
+    isExam.checked = false
+
+    const liActive = document.querySelectorAll('.filter__item-li_active')
+    liActive.forEach(item => {
+      item.classList.remove('filter__item-li_active')
+    })
+
+    document.querySelector('.tutors__sortby-li_active').classList.remove('tutors__sortby-li_active')
+
+
+    const filterSubject = document.querySelector('[data-filter="subject"]')
+    filterSubject.querySelector('.filter__item-li').classList.add('filter__item-li_active')
+
+    const filterExperience = document.querySelector('[data-filter="experience"]')
+    filterExperience.querySelector('.filter__item-li').classList.add('filter__item-li_active')
+
+    document.querySelector('.tutors__sortby-li').classList.add('tutors__sortby-li_active')
+
+    let data = this.getAttribute('data-search')
+    smoothScroll(data, '.filter')
+  })
+
+
+  // <========= События для для кнопки "Добавить в кандидаты" =========>
+  getData().getTutors().then(items => {
+    createListenerPersonBtn()
+  })
+ 
 }
