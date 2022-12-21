@@ -9,6 +9,7 @@
 </head>
 <body>
 
+  <!-- Header -->
   <header class="header">
     <div class="container">
       <div class="header__wrap">
@@ -20,14 +21,138 @@
           <input type="text" placeholder="Имя репетитор" class="header__search">
         </div>
 
-        <div class="header__item header__item_auth">
-          <div>ddf</div>
-          <div>ddf</div>
+        <div class="header__item header__item_cand">
+          <div>Кандидаты</div>
+          <div class="header__item-cand-block">
+            <img src="./images/cad-ic.svg" alt="">
+            <span class="header__item-cand-count">0</span>
+          </div>
           <!-- Здесь либо регистрация, либо счетчик кандидатов -->
         </div>
       </div>
     </div>
   </header>
+  <!-- ./Header -->
+
+
+  <!-- Filter -->
+  <section class="filter">
+    <div class="container">
+      <div class="filter__wrap">
+        <div class="filter__item filter__item_filters">
+
+          <!-- Subject Filter -->
+          <div class="filter__item-block" data-filter="subject">
+            <h2 class="filter__item-title">Предмет</h2>
+            <span class="filter__item-selected" id="selected-subject">Математика</span>
+            <div class="filter__item-more none filter__item-more_subject">
+              <!-- li -->
+            </div>
+          </div>
+          <!-- ./Subject Filter -->
+
+          <!-- Price Filter -->
+          <div class="filter__item-block" data-filter="price">
+            <h2 class="filter__item-title">Цена за час</h2>
+            <div class="filter__item-price">
+              <input type="text" class="filter__item-input filter__item-price-start" placeholder="от" data-input="startPrice">
+              <input type="text" class="filter__item-input filter__item-price-end" placeholder="до" data-input="endPrice">
+            </div>
+          </div>
+          <!-- ./Price Filter -->
+
+          <!-- Experience Filter -->
+          <div class="filter__item-block" data-filter="experience">
+            <h2 class="filter__item-title">Опыт работы</h2>
+            <span class="filter__item-selected" id="selected-experience">любой</span>
+            <div class="filter__item-more none filter__item-more_experience">
+              <!-- li -->
+            </div>
+          </div>
+          <!-- ./Experience Filter -->
+
+          <!-- Rating Filter -->
+          <div class="filter__item-block" data-filter="rating">
+            <h2 class="filter__item-title">Рейтинг</h2>
+            <div class="filter__item-rating">
+              <input type="text" class="filter__item-input filter__item-rating-count" data-input="rating" placeholder="5" id="rating">
+              <span class="filter__item-rating-text">звезд</span>
+            </div>
+          </div>
+          <!-- ./Rating Filter -->
+
+          <button class="filter__btn-clear" data-search="search-res">Сбросить фильтр</button>
+
+        </div>
+
+
+
+        <div class="filter__item filter__item_btn">
+          <button class="filter__btn btn" data-search="search-res">Искать репетитора</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ./Filter -->
+
+
+  <!-- Tutors -->
+  <section class="tutors">
+    <div class="container">
+      <div class="tutors__top">
+        <h1 class="tutors__title title-1">Все специалисты</h1>
+        <div class="tutors__filter">
+          <div class="tutors__isexam">
+            <input type="checkbox" class="tutors__checkbox" id="check">
+            <label for="check">🔥 Подготовка к огэ/егэ</label>
+          </div>
+
+          <div class="tutors__sort">
+            <div class="tutors__sortby">Сортировка по: <span class="tutors__sortby-selected">популярности</span></div>
+            <div class="tutors__sortby-more none">
+              <!-- li -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tutors__not-found none">К сожалению по вашему запросу ничего не найдено :(</div>
+
+      <div class="tutors__bottom" id="search-res">
+
+        <!-- <div class="tutors__person">
+          <img alt="" class="tutors__person-img" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80">
+
+          <span class="tutors__person-subject">математика</span>
+
+
+          <div class="tutors__person-info">
+            <h3 class="tutors__person-name title-2">Андрей Гавриков</h3>
+            <span class="tutors__person-exam">огэ / егэ</span>
+          </div>
+
+          <div class="tutors__person-info tutors__person-info_2">
+            <div class="tutors__person-rating">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-ac.svg" alt="">
+              <img src="./images/star-dis.svg" alt="">
+            </div>
+            <div class="tutors__person-price">1 200 / час</div>
+          </div>
+
+          <div class="tutors__person-info">
+            <p class="tutors__person-text">В рамках спецификации современных стандартов, предприниматели в сети интернет, инициированные исключительно синтетически, объективно рассмотрены соответствующими инстанциями.</p>
+          </div>
+
+          <button class="tutors__person-btn btn">Добавить в кандидаты</button>
+
+        </div> -->
+      </div>
+    </div>
+  </section>
+  <!-- ./Tutors -->
 
 </body>
 </html>

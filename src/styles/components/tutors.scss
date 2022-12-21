@@ -1,0 +1,261 @@
+.tutors {
+  margin-bottom: 90px;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  &__filter {
+    display: flex;
+  }
+  &__isexam {
+    margin-right: 70px;
+  }
+  &__checkbox {
+    position: relative;
+    z-index: -1;
+    opacity: 0;
+    & + label {
+      position: relative;
+      padding: 0 0 0 55px;
+      cursor: pointer;
+      &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 40px;
+        height: 24px;
+        border-radius: 13px;
+        background: #E1E1E1;
+        transition: .2s;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 16px;
+        height: 16px;
+        border-radius: 10px;
+        background: #AAAAAA;
+        // box-shadow: 0 2px 5px rgba(0,0,0,.4);
+        transition: .2s;
+      }
+    }
+    &:checked + label:before {
+      background: $accent;
+    }
+    &:checked + label:after {
+      background: #fff;
+      left: 19px;
+    }
+  }
+  &__sort {
+    position: relative;
+    cursor: pointer;
+  }
+  &__sortby {
+    font-weight: 600;
+    font-size: 14px;
+    position: relative;
+    &::before {
+      content: url(./../images/select-ic-2.svg);
+      position: absolute;
+      left: -20px;
+      transition: $trans;
+    }
+    &_active {
+      &::before {
+        transform: rotate(180deg);
+      }
+    }
+    &-selected {
+      margin-left: 11px;
+      font-weight: 400;
+      text-decoration: underline;
+      color: $accent;
+    }
+    &-more {
+      position: absolute;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+      border-radius: 0px 0px 10px 10px;
+      top: 40px;
+      overflow: hidden;
+      background-color: #fff;
+      z-index: 3;
+    }
+    &-li {
+      display: block;
+      padding: 10px 20px;
+      transition: all .3s;
+      cursor: pointer;
+      position: relative;
+      z-index: 6;
+      &::before {
+        content: '';
+        width: 0;
+        height: 100%;
+        background-color: $accent;
+        transition: all .3s;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+      }
+      &:hover {
+        color: #fff;
+        &::before {
+          width: 100%;
+        }
+      }
+      &_active {
+        color: #fff;
+        &::before {
+          content: '';
+          width: 100%;
+        }
+      }
+    }
+  }
+  &__not-found {
+    font-size: 28px;
+    max-width: 500px;
+    color: $grayText;
+  }
+  &__bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 25px;
+    row-gap: 80px;
+  }
+  &__person {
+    position:relative;
+    // width: 33.333%;
+    &-img {
+      margin-bottom: 25px;
+      border-radius: 10px;
+    }
+    &-subject {
+      color: $accent;
+    }
+    &-info {
+      display: flex;
+      align-items: center;
+      &_2 {
+        margin: 10px 0 22px 0;
+      }
+    }
+    &-exam {
+      margin-left: 20px;
+      padding: 4px 15px;
+      background: $accent;
+      border-radius: 13px;
+      color: #fff;
+      font-size: 14px;
+    }
+    &-rating {
+      display: flex;
+      & img {
+        margin-right: 4px;
+      }
+    }
+    &-price {
+      margin-left: 30px;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    &-exp {
+      color: $accent;
+    }
+    &-text {
+      line-height: 144%;
+      color: $grayText;
+      margin-bottom: 73px;
+    }
+    &-btn {
+      width: 100%;
+      padding: 10px 61px;
+      font-weight: 600;
+      position:absolute;
+      bottom:0;
+    }
+  }
+}
+
+
+
+// <======== Media Queries (Response) ========>
+@media (max-width: 992px) {	
+	.tutors {
+    &__title {
+      font-size: 28px;
+    }
+    &__bottom {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+
+@media (max-width: 768px) {	
+	.tutors {
+    &__filter {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    &__isexam {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    &__bottom {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    &__person-btn {
+      width: 100%;
+    }
+  }
+}
+
+
+@media (max-width: 576px) {	
+	.tutors {
+    &__title {
+      font-size: 32px;
+    }
+    &__top {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    &__filter {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 30px;
+    }
+    &__checkbox {
+      & + label {
+        padding: 0 0 0 45px;
+        &::before {
+          content: '';
+          left: -16px;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          top: 2px;
+          left: -12px;
+        }
+      }
+      &:checked + label:after {
+        left: 2px;
+      }
+    }
+    &__sortby {
+      padding-left: 30px;
+      &::before {
+        left: 5px;
+      }
+    }
+  }
+}
